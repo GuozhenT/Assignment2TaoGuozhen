@@ -1,0 +1,87 @@
+﻿@model FishingSpot
+
+@{
+    ViewData["Title"] = "FishingSpot details";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="card mb-12">
+            <div class="row g-0">
+                <div class="col-md-12">
+                    <div class="card-header text-white bg-info">
+                        <p class="card-text">
+                            <h5 class="card-title">
+                                @Model.Name
+                            </h5>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="@Model.ImageUrl" alt="@Model.Name" width="300px">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <p class="card-text">@Model.Description</p>
+                        <p class="card-text">
+                            <b>Park: </b>
+                            <a asp-controller="Parks" asp-action="Details" asp-route-id="@Model.ParkId">
+                                @Model.Park.Name
+                            </a>
+                        </p>
+                        <p class="card-text">
+                            <b>ManageCompany: </b>
+                            <a asp-controller="ManageCompanies" asp-action="Details" asp-route-id="@Model.ManageCompanyId">
+                                @Model.ManageCompany.Name
+                            </a>
+                        </p>
+                        <p class="card-text"><b>Category: </b>@Model.SpotCategory</p>
+                        <p class="card-text"><b>Start Date: </b>@Model.OpenDate.ToString("dd MMM yy")</p>
+                        <p class="card-text"><b>End Date: </b>@Model.CloseDate.ToString("dd MMM yy")</p>
+                        <p class="card-text ">
+                            <b>Status: </b>
+                            @if (DateTime.Now >= Model.OpenDate && DateTime.Now <= Model.CloseDate)
+                            {
+                                <span class="badge bg-success text-white">AVAILABLE</span>
+                            }
+                            else if (DateTime.Now > Model.CloseDate)
+                            {
+                                <span class="badge bg-danger text-white">EXPIRED</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-primary text-white">UPCOMING</span>
+                            }
+                        </p>
+                        <p class="card-text">
+                            <b>Actors: </b>
+                            <hr />
+                            <div class="row">
+                                @foreach (var foodcourtFishingSpot in Model.Foodcourts_FishingSpots)
+                                {
+                                    <div class="column text-center">
+                                        <br />
+                                        <a asp-controller="Foodcourts" asp-action="Details" asp-route-id="@foodcourtFishingSpot.FoodcourtId">@foodcourtFishingSpot.Foodcourt.Name</a>
+                                    </div>
+                                }
+                            </div>
+                        </p>
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card-footer">
+                        <p class="card-text">
+                            <a class="btn btn-outline-primary float-right" asp-action="Index">
+                                Back to List
+                            </a>
+                            <a class="btn btn-success text-white  @((DateTime.Now > Model.CloseDate) ? "disabled" : "")" 
+                               asp-controller="Orders" 
+                               asp-action="AddItemToShoppingCart" asp-route-id="@Model.Id"><i class="bi bi-cart-plus"></i> Add to Cart (Price @Model.Price.ToString("c"))</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,32 +1,32 @@
-﻿using Assignment2TaoGuozhen.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Assignment2TaoGuozhen.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        [Route("/Home/HandleError/{code:int}")]
+        public IActionResult HandleError(int code)
         {
-            _logger = logger;
-        }
+            ViewData["ErrorMessage"] = $"Error occurred. The ErrorCode is: {code}";
+            switch (code)
+            {
+                case 401:
+                    return View("~/Views/Shared/Error/401.cshtml");
+                break;
+                case 403:
+                    return View("~/Views/Shared/Error/403.cshtml");
+                    break;
+                case 404:
+                    return View("~/Views/Shared/Error/404.cshtml");
+                break;
+                case 500:
+                    return View("~/Views/Shared/Error/500.cshtml");
+                    break;
+                default:
+                    return View("~/Views/Shared/Error.cshtml");
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
         }
     }
 }

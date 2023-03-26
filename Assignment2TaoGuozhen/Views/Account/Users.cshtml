@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ApplicationUser>
+
+@{
+    ViewData["Title"] = "List of all users";
+}
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <p>
+            <h4>List of all users</h4>
+        </p>
+
+        <table class="table">
+            <thead>
+                <tr class="text-center">
+                    <th>@Html.DisplayNameFor(model => model.FullName)</th>
+                    <th>@Html.DisplayNameFor(model => model.UserName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Email)</th>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <th>Actions</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                        
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <td class="align-middle">
+                                @if (DateTime.Now >= item.LockoutEnd)
+                                {
+                                    <a class="btn btn-outline-primary" asp-action="Lock" asp-route-id="@item.Id"><i class="bi bi-lock"></i>Lock </a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-outline-primary" asp-action="Unlock" asp-route-id="@item.Id"><i class="bi bi-unlock"></i>Unlock </a>
+                                }
+
+                            </td>
+                        }
+                </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
