@@ -31,11 +31,7 @@ namespace Assignment2TaoGuozhen.Models
         public int ParkId { get; set; }
         [ForeignKey("ParkId")]
         public Park? Park { get; set; }
-
-        public  int PromotionId { get; set; }
-        [ForeignKey("PromotionId")]
-        public Promotion? Promotion { get; set; }
-
+        
         //ManageCompany
         public int ManageCompanyId { get; set; }
         [ForeignKey("ManageCompanyId")]

@@ -17,7 +17,7 @@ namespace Assignment2TaoGuozhen.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.14")
+                .HasAnnotation("ProductVersion", "6.0.15")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -135,7 +135,7 @@ namespace Assignment2TaoGuozhen.Data.Migrations
 
                     b.HasIndex("ParkId");
 
-                    b.ToTable("FishingSpots");
+                    b.ToTable("FishingSpots", (string)null);
                 });
 
             modelBuilder.Entity("Assignment2TaoGuozhen.Models.Foodcourt", b =>
@@ -159,7 +159,7 @@ namespace Assignment2TaoGuozhen.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Foodcourts");
+                    b.ToTable("Foodcourts", (string)null);
                 });
 
             modelBuilder.Entity("Assignment2TaoGuozhen.Models.Foodcourt_FishingSpot", b =>
@@ -174,7 +174,7 @@ namespace Assignment2TaoGuozhen.Data.Migrations
 
                     b.HasIndex("FishingSpotId");
 
-                    b.ToTable("FoodcourtsFishingSpots");
+                    b.ToTable("FoodcourtsFishingSpots", (string)null);
                 });
 
             modelBuilder.Entity("Assignment2TaoGuozhen.Models.ManageCompany", b =>
@@ -199,7 +199,7 @@ namespace Assignment2TaoGuozhen.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ManageCompanies");
+                    b.ToTable("ManageCompanies", (string)null);
                 });
 
             modelBuilder.Entity("Assignment2TaoGuozhen.Models.Order", b =>
@@ -222,7 +222,7 @@ namespace Assignment2TaoGuozhen.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("Assignment2TaoGuozhen.Models.OrderItem", b =>
@@ -251,7 +251,7 @@ namespace Assignment2TaoGuozhen.Data.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("Assignment2TaoGuozhen.Models.Park", b =>
@@ -272,7 +272,7 @@ namespace Assignment2TaoGuozhen.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Parks");
+                    b.ToTable("Parks", (string)null);
                 });
 
             modelBuilder.Entity("Assignment2TaoGuozhen.Models.ShoppingCartItem", b =>
@@ -297,7 +297,7 @@ namespace Assignment2TaoGuozhen.Data.Migrations
 
                     b.HasIndex("FishingSpotId");
 
-                    b.ToTable("ShoppingCartItems");
+                    b.ToTable("ShoppingCartItems", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

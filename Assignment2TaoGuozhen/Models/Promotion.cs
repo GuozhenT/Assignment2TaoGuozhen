@@ -12,9 +12,5 @@ namespace Assignment2TaoGuozhen.Models
 
         public double? Rate { get; set; }
 
-        //Relationships
-
-        public List<FishingSpot>? FishingSpots { get; set;}
-
     }
 }
